@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Coloring Page Generator: turn a photo into printable black-and-white line art in your browser.">
+  <title>AI Coloring Page Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI Coloring Page Generator</p>
+        <h1>Turn a photo into printable line art.</h1>
+      </div>
+      <p class="privacy-badge">Private by design<br><span>Your photo stays in this browser.</span></p>
+    </header>
+
+    <section class="workspace" aria-label="AI coloring page generator">
+      <section class="panel controls-panel">
+        <div class="panel-heading">
+          <p class="step">1 · Add a photo</p>
+          <h2>Start with an image</h2>
+        </div>
+        <label id="dropzone" class="dropzone" for="file-input">
+          <input id="file-input" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <strong>Choose a photo</strong>
+          <span>JPG, PNG, WebP, or GIF</span>
+        </label>
+
+        <div id="controls" class="controls is-disabled" aria-disabled="true">
+          <div class="panel-heading control-heading">
+            <p class="step">2 · Refine the line art</p>
+            <h2>Make it your own</h2>
+          </div>
+          <label class="range-row" for="detail">
+            <span>Detail <output id="detail-value">55</output></span>
+            <input id="detail" type="range" min="10" max="95" value="55">
+          </label>
+          <label class="range-row" for="thickness">
+            <span>Line thickness <output id="thickness-value">2</output></span>
+            <input id="thickness" type="range" min="1" max="4" value="2">
+          </label>
+          <label class="toggle-row" for="invert">
+            <span>Invert black and white</span>
+            <input id="invert" type="checkbox">
+          </label>
+          <label class="paper-row" for="paper-size">
+            <span>Print paper size</span>
+            <select id="paper-size">
+              <option value="a4">A4 · 2480 × 3508 px · 300 DPI</option>
+              <option value="letter">US Letter · 2550 × 3300 px · 300 DPI</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel preview-panel">
+        <div class="preview-header">
+          <div>
+            <p class="step">3 · Preview & export</p>
+            <h2>Your coloring page</h2>
+          </div>
+          <span id="status" class="status" role="status">Add a photo to begin</span>
+        </div>
+        <div class="canvases">
+          <figure>
+            <figcaption>Original photo</figcaption>
+            <div class="canvas-frame"><canvas id="source-canvas" aria-label="Uploaded photo preview"></canvas><span id="source-empty">Your photo will appear here</span></div>
+          </figure>
+          <figure>
+            <figcaption>Black-and-white line art</figcaption>
+            <div class="canvas-frame"><canvas id="result-canvas" aria-label="Generated black-and-white line art preview"></canvas><span id="result-empty">Your line art will appear here</span></div>
+          </figure>
+        </div>
+        <div id="exports" class="exports is-disabled" aria-disabled="true">
+          <button id="download-png" class="button secondary" type="button">Download PNG</button>
+          <button id="download-pdf" class="button secondary" type="button">Download printable PDF</button>
+          <button id="print-page" class="button primary" type="button">Print coloring page</button>
+        </div>
+        <p id="export-note" class="export-note">Exports are prepared at 300 DPI after you add a photo.</p>
+      </section>
+    </section>
+
+    <section class="trust-strip" aria-label="Privacy and access details">
+      <span>All processing happens in your browser.</span>
+      <span>Your uploaded photo is never sent to a server.</span>
+      <span>No sign-up · No watermark · No usage limit</span>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
