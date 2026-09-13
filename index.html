@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI Coloring Page Generator: turn a photo into printable black-and-white line art in your browser.">
   <title>AI Coloring Page Generator</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a class="site-nav__brand" href="/">AI Coloring Page Generator</a>
+    <div class="site-nav__links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </nav>
+
   <main class="app-shell">
     <header class="topbar">
       <div>
@@ -60,7 +70,7 @@
       <section class="panel preview-panel">
         <div class="preview-header">
           <div>
-            <p class="step">3 · Preview & export</p>
+            <p class="step">3 · Preview &amp; export</p>
             <h2>Your coloring page</h2>
           </div>
           <span id="status" class="status" role="status">Add a photo to begin</span>
@@ -90,6 +100,18 @@
       <span>No sign-up · No watermark · No usage limit</span>
     </section>
   </main>
-  <script src="app.js"></script>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <nav class="site-footer__links" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+      </nav>
+      <p class="site-footer__note">AI Coloring Page Generator · Maintained by an independent developer</p>
+    </div>
+  </footer>
+  <script src="/app.js"></script>
 </body>
 </html>
