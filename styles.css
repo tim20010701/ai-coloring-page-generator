@@ -29,6 +29,7 @@ h1,h2 { margin:0; letter-spacing:-.035em; } h1 { max-width:700px; font-size:clam
 .site-footer__links a { padding:10px 0; color:var(--soft); font-size:.88rem; font-weight:700; text-decoration:none; }
 .site-footer__links a:hover { color:var(--accent); }
 .site-footer__note { margin:0; color:var(--soft); font-size:.82rem; }
+.site-footer__disclosure { flex:1 0 100%; margin:0; color:var(--soft); font-size:.82rem; }
 .content-page { width:min(780px,calc(100% - 32px)); margin:0 auto; padding:40px 0 10px; }
 .content-card { padding:32px; border:1px solid rgba(101,115,107,.22); border-radius:22px; background:rgba(255,254,250,.9); box-shadow:var(--shadow); }
 .content-page h1 { font-size:clamp(1.7rem,3.4vw,2.4rem); }
