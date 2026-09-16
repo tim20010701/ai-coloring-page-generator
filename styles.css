@@ -18,7 +18,7 @@ h1,h2 { margin:0; letter-spacing:-.035em; } h1 { max-width:700px; font-size:clam
 /* 首页 Guides 区：给两个内容页一个正文内的入口（比页脚链接权重高） */
 .guides { margin:34px 0 0; }
 .guides h2 { margin:0 0 14px; font-size:1.25rem; }
-.guides__grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.guides__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:16px; }
 .guide-card { display:block; padding:20px; border:1px solid rgba(101,115,107,.22); border-radius:18px; background:rgba(255,254,250,.88); box-shadow:var(--shadow); text-decoration:none; transition:.16s ease; }
 .guide-card:hover { border-color:var(--accent); }
 .guide-card h3 { margin:0 0 7px; color:var(--ink); font-size:1.02rem; letter-spacing:-.02em; }
