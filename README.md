@@ -125,6 +125,13 @@ edge injects email-obfuscation markup into pages containing an email address, ad
 239 bytes to each of those two responses. The files in this repository are the
 pre-injection source; the difference is expected and is not drift.
 
+The injected payload is randomised per response, so those two pages never hash to a stable
+value: three consecutive fetches of `/contact/` all returned 2726 bytes with three
+different SHA-256 digests. Do not treat a hash mismatch there as drift. To compare, first
+strip the injected `<script ... email-decode.min.js>` tag and replace the
+`/cdn-cgi/l/email-protection#...` anchor with the original `mailto:` link — the result is
+byte-identical to this repository.
+
 **`_headers` is not a static asset.** Cloudflare Pages parses it and applies the headers,
 and returns 404 for `/_headers` itself.
 
