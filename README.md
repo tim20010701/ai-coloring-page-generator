@@ -38,6 +38,7 @@ This repository contains two kinds of files. Only the first kind is deployed.
 | `_src/footer.html` | Footer partial, kept in sync across the four pages |
 | `build_footer.py` | Injects `_src/footer.html` into every page |
 | `deploy.sh` | Deploys the site files (and only those) to Cloudflare Pages |
+| `.gitattributes` | Pins every file to LF so a Windows checkout cannot drift from the live bytes |
 | `README.md` | This file |
 
 These are deliberately excluded from deployment. Requesting them on the live site returns
@@ -80,6 +81,14 @@ Zero new uploads means every file you deployed is byte-identical to what was alr
 If instead all files are uploaded, something differs — check whether you intended to change
 that many files.
 
+### Verified state
+
+All 11 site files in this repository are byte-identical (SHA-256) to the deployed files and
+to the live HTTP responses, with the two documented exceptions below: `contact/index.html`
+and `privacy/index.html` differ from the live response only by Cloudflare's email
+obfuscation, and `_headers` is never served as an asset. Restoring the injected markup on
+those two pages reproduces the repository bytes exactly.
+
 ### Rolling back
 
 ```sh
@@ -100,9 +109,12 @@ curl "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages
 ## Notes that are easy to get wrong
 
 **Line endings.** Git on Windows may check these files out with CRLF. The deployed files
-use LF, so committing CRLF versions makes every file on the live site grow by a few dozen
-bytes. `deploy.sh` strips `\r` before uploading, but prefer keeping the repository at LF
-(`git config core.autocrlf false`, or a `.gitattributes`).
+use LF, so a CRLF working copy makes every file on the live site grow by a few dozen bytes.
+This repository ships a `.gitattributes` containing `* text=auto eol=lf`, which forces LF on
+checkout regardless of `core.autocrlf`. Verified: with `core.autocrlf=true` and no
+`.gitattributes`, `index.html` checks out as 5325 bytes with 118 CRLF pairs; with
+`.gitattributes` present it checks out as 5207 bytes, byte-identical to the live file.
+`deploy.sh` also strips `\r` before uploading, as a second line of defence.
 
 **The IndexNow key file has no trailing newline.** It is exactly the key, 32 bytes. Adding
 a newline changes the deployed file; it still works, but then the repository and the live
