@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical checklist for turning a photo into a printable coloring page: choosing the photo, tuning the line art, picking the paper size, and test-printing before a full run.">
+  <title>Checklist: turning a photo into a printable coloring page · AI Coloring Page Generator</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a class="site-nav__brand" href="/">AI Coloring Page Generator</a>
+    <div class="site-nav__links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </nav>
+
+  <main class="content-page">
+    <div class="content-card">
+      <h1>Checklist: turning a photo into a printable coloring page</h1>
+      <p class="updated">Last updated: 16 September 2026</p>
+
+      <p>A practical checklist for making a line-art coloring page from a photo and getting it onto paper without wasting ink or card stock. Work through it in order — most disappointing results come from the photo, not from the conversion settings.</p>
+
+      <h2>1. Pick the right photo</h2>
+      <ul class="checklist">
+        <li>One clear subject. Busy backgrounds turn into dense scribble once edges are extracted.</li>
+        <li>Even lighting. Hard shadows get detected as edges and show up as heavy black patches.</li>
+        <li>Good contrast between the subject and the background.</li>
+        <li>The subject fills most of the frame — small subjects lose detail when scaled up.</li>
+        <li>Resolution at least as large as the print target. A 300 DPI A4 export is 2480 × 3508 px; upscaling a small photo will not add detail.</li>
+      </ul>
+
+      <h2>2. Convert to line art</h2>
+      <ul class="checklist">
+        <li>Start with a medium detail setting, then adjust, rather than starting at an extreme.</li>
+        <li>Increase detail for subjects with fine features — faces, fur, foliage.</li>
+        <li>Decrease detail for very busy photos. Fewer edges means a page a child can actually colour.</li>
+        <li>Increase line thickness if the picture will be printed small, or if fine lines tend to disappear on your printer.</li>
+        <li>Check the inverted preview too. Some photos read better as white lines on black, which also uses noticeably more ink — only choose it deliberately.</li>
+      </ul>
+
+      <h2>3. Choose the paper size</h2>
+      <ul class="checklist">
+        <li>A4 if you are outside the United States, US Letter if you are in the US or Canada. See <a href="/a4-vs-us-letter/">A4 vs US Letter</a> for what actually changes.</li>
+        <li>Match the size to the paper already in your printer tray before exporting.</li>
+      </ul>
+
+      <h2>4. Export</h2>
+      <ul class="checklist">
+        <li>Export at 300 DPI for printing. 72–96 DPI is screen resolution and looks soft on paper.</li>
+        <li>PDF if you want the file to open at exactly the right physical size on any machine.</li>
+        <li>PNG if you want to drop the image into another document or resize it yourself.</li>
+      </ul>
+
+      <h2>5. Before you print a full run</h2>
+      <ul class="checklist">
+        <li>Print one copy on plain paper first.</li>
+        <li>Check that the thinnest lines actually appear. If they do not, raise line thickness or lower detail and re-export.</li>
+        <li>Check that no large area filled in solid black. If it did, lower the detail setting.</li>
+        <li>Confirm your printer is not set to "fit to page" in a way that scales the image down and leaves white margins you did not intend.</li>
+      </ul>
+
+      <h2>6. Paper and supplies</h2>
+      <ul class="checklist">
+        <li>Plain 80–90 gsm copy paper is fine for crayons and coloured pencils.</li>
+        <li>Heavier paper or card stock if markers, paint, or glue will be used.</li>
+        <li>Keep a test sheet. Marker bleed varies a lot between paper brands.</li>
+      </ul>
+
+      <h2>7. If the page will be shared</h2>
+      <ul class="checklist">
+        <li>Confirm you own the photo or have permission to use it.</li>
+        <li>Remember that a photo of a child is still personal data even after it becomes line art.</li>
+        <li>Keep the original photo out of any upload unless you are certain where it is going.</li>
+      </ul>
+
+      <h2>Where the numbers come from</h2>
+      <ul>
+        <li><strong>Pixel dimensions:</strong> computed as <code>width_px = width_in × dpi</code>, with 1 inch = 25.4 mm. A4 is 210 × 297 mm; US Letter is 8.5 × 11 in.</li>
+        <li><strong>The 300 DPI values</strong> (A4 2480 × 3508, US Letter 2550 × 3300) match what <a href="/">AI Coloring Page Generator</a> produces, which is what this checklist was written for.</li>
+        <li><strong>Paper weights:</strong> general office-paper practice, not a measured value. Treat the gsm suggestions as a starting point and test with your own printer.</li>
+      </ul>
+
+      <p>Related: <a href="/a4-vs-us-letter/">A4 vs US Letter for printable coloring pages</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <nav class="site-footer__links" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/a4-vs-us-letter/">A4 vs US Letter</a>
+        <a href="/printable-coloring-page-checklist/">Printing checklist</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+      </nav>
+      <p class="site-footer__note">AI Coloring Page Generator · Maintained by an independent developer</p>
+      <p class="site-footer__disclosure">Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you.</p>
+    </div>
+  </footer>
+</body>
+</html>
