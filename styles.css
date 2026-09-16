@@ -15,7 +15,15 @@ h1,h2 { margin:0; letter-spacing:-.035em; } h1 { max-width:700px; font-size:clam
 .canvases { display:grid; grid-template-columns:1fr 1fr; gap:17px; margin:20px 0; } figure { margin:0; } figcaption { margin:0 0 8px; color:var(--soft); font-size:.81rem; font-weight:800; }.canvas-frame { position:relative; display:grid; min-height:270px; place-items:center; overflow:hidden; border:1px solid var(--line); border-radius:15px; background:repeating-conic-gradient(#f5f5f1 0 25%,#fffefa 0 50%) 50%/18px 18px; }.canvas-frame canvas { display:block; width:100%; height:auto; max-height:420px; object-fit:contain; background:white; }.canvas-frame span { position:absolute; color:#839087; font-size:.84rem; text-align:center; }.canvas-frame canvas:not([width="0"]) + span { display:none; }
 .exports { display:flex; flex-wrap:wrap; gap:10px; }.button { min-height:43px; padding:0 16px; border:1px solid transparent; border-radius:11px; cursor:pointer; font:700 .9rem/1 Inter,ui-sans-serif,system-ui,sans-serif; }.button.primary { background:var(--accent); color:white; }.button.primary:hover { background:#145d42; }.button.secondary { border-color:#b8c7bc; background:white; color:var(--ink); }.export-note { margin:15px 0 0; color:var(--soft); font-size:.81rem; }
 .trust-strip { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 25px; margin:23px 0 0; color:#3b5e4e; font-size:.84rem; font-weight:650; }.trust-strip span::before { content:"✓"; margin-right:7px; color:var(--accent); font-weight:900; }
-@media (max-width:760px) { .app-shell { width:min(100% - 22px,620px); padding-top:25px; }.topbar,.workspace { display:block; }.privacy-badge { display:inline-block; margin-top:17px; }.controls-panel { margin-bottom:16px; }.canvases { grid-template-columns:1fr; }.canvas-frame { min-height:220px; }.preview-header { align-items:flex-end; }.status { max-width:150px; text-align:right; }.exports .button { width:100%; }.trust-strip { justify-content:flex-start; } }
+/* 首页 Guides 区：给两个内容页一个正文内的入口（比页脚链接权重高） */
+.guides { margin:34px 0 0; }
+.guides h2 { margin:0 0 14px; font-size:1.25rem; }
+.guides__grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.guide-card { display:block; padding:20px; border:1px solid rgba(101,115,107,.22); border-radius:18px; background:rgba(255,254,250,.88); box-shadow:var(--shadow); text-decoration:none; transition:.16s ease; }
+.guide-card:hover { border-color:var(--accent); }
+.guide-card h3 { margin:0 0 7px; color:var(--ink); font-size:1.02rem; letter-spacing:-.02em; }
+.guide-card p { margin:0; color:var(--soft); font-size:.88rem; line-height:1.6; }
+@media (max-width:760px) { .app-shell { width:min(100% - 22px,620px); padding-top:25px; }.topbar,.workspace { display:block; }.privacy-badge { display:inline-block; margin-top:17px; }.controls-panel { margin-bottom:16px; }.canvases { grid-template-columns:1fr; }.canvas-frame { min-height:220px; }.preview-header { align-items:flex-end; }.status { max-width:150px; text-align:right; }.exports .button { width:100%; }.trust-strip { justify-content:flex-start; }.guides__grid { grid-template-columns:1fr; } }
 
 /* --- 导航 / 页脚 / 内容页（自检补齐时新增） --- */
 .site-nav { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 20px; width:min(1180px,calc(100% - 32px)); margin:0 auto; padding:14px 0; border-bottom:1px solid var(--line); }
@@ -38,6 +46,18 @@ h1,h2 { margin:0; letter-spacing:-.035em; } h1 { max-width:700px; font-size:clam
 .content-page p, .content-page li { color:#33443c; font-size:.96rem; line-height:1.75; }
 .content-page ul { padding-left:20px; }
 .content-page a { color:var(--accent); }
+/* 内容页里的表格（A4 vs US Letter 等）：窄屏靠 .table-wrap 横向滚动，不撑破卡片 */
+.table-wrap { margin:14px 0 18px; overflow-x:auto; }
+.content-page table { width:100%; border-collapse:collapse; font-size:.9rem; }
+.content-page th, .content-page td { padding:9px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+.content-page thead th { border-bottom:2px solid #c3cec6; color:var(--ink); font-weight:800; white-space:nowrap; }
+.content-page tbody th { color:var(--soft); font-weight:700; white-space:nowrap; }
+.content-page tbody tr:last-child th, .content-page tbody tr:last-child td { border-bottom:0; }
+.content-page code { padding:1px 5px; border-radius:5px; background:#eef2ec; color:#2b4a3c; font-size:.86em; }
+/* 勾选清单：原文是 markdown 的 - [ ]，这里渲染成方框 */
+.content-page ul.checklist { padding-left:0; list-style:none; }
+.content-page ul.checklist li { position:relative; margin:0 0 9px; padding-left:27px; }
+.content-page ul.checklist li::before { content:""; position:absolute; left:0; top:.42em; width:14px; height:14px; border:1.5px solid #9fb3a6; border-radius:4px; background:var(--white); }
 /* 滑块触控区放大到 44px（原 16px，手指点着偏小） */
 input[type="range"] { height:44px; margin:0; }
 @media (max-width:760px) { .site-nav { width:min(100% - 22px,620px); padding:12px 0; }.site-nav__links { gap:0 14px; }.site-footer__inner { width:min(100% - 22px,620px); }.content-page { width:min(100% - 22px,620px); padding-top:24px; }.content-card { padding:24px; } }
