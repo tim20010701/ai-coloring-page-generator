@@ -66,7 +66,7 @@ live site identical.
 If `wrangler` is not on your `PATH`, point the script at it:
 
 ```sh
-WRANGLER="node /path/to/wrangler/bin/wrangler.js" ./deploy.sh
+WRANGLER="node /path/to/wrangler/bin/wrangler.js" bash deploy.sh
 ```
 
 ### Checking that a deploy changed nothing
