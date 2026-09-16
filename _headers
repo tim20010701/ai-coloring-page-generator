@@ -1,0 +1,36 @@
+# Cloudflare Pages _headers
+#
+# 这个文件不会被当成静态资源发布，只用来给响应加 HTTP 头。
+#
+# 作用一：规范网址（canonical）
+#   站点同时能从 photlin.com 和 www.photlin.com 访问，内容是同一份。
+#   用 Link: rel="canonical" 告诉搜索引擎以 photlin.com 为准。
+#   依据：Google Search Central「Consolidate duplicate URLs」原文支持
+#   "a `link` HTTP response header with a `rel=\"canonical\"` target attribute"，
+#   并要求使用绝对网址。站点 HTML 里没有 canonical 元素，只用这一种方式，不重复。
+#
+# 作用二：屏蔽 pages.dev 的重复版本
+#   项目同时能通过 ai-coloring-page.pages.dev 和
+#   <部署ID>.ai-coloring-page.pages.dev 访问，那是同一份内容。
+#   用 X-Robots-Tag: noindex 阻止它们被收录，避免和主域名抢规范位。
+#   这两个模式只匹配 *.pages.dev 主机名，不会作用于 photlin.com。
+#
+# 注意：Cloudflare 文档说明 _headers 规则会忽略请求的端口和协议，但会匹配主机名。
+
+/
+	Link: <https://photlin.com/>; rel="canonical"
+
+/about/
+	Link: <https://photlin.com/about/>; rel="canonical"
+
+/contact/
+	Link: <https://photlin.com/contact/>; rel="canonical"
+
+/privacy/
+	Link: <https://photlin.com/privacy/>; rel="canonical"
+
+https://:project.pages.dev/*
+	X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+	X-Robots-Tag: noindex
