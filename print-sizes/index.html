@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pixel dimensions for common paper sizes at 150, 300 and 600 DPI — A3, A4, A5, A6, US Letter, Legal, Tabloid and Half Letter — with the formula used to work them out.">
+  <title>Print sizes in pixels: paper size chart · AI Coloring Page Generator</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a class="site-nav__brand" href="/">AI Coloring Page Generator</a>
+    <div class="site-nav__links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </nav>
+
+  <main class="content-page">
+    <div class="content-card">
+      <h1>Print sizes in pixels</h1>
+      <p class="updated">Last updated: 16 September 2026</p>
+
+      <p>To print a picture at a given size and resolution, the image has to be a specific number of pixels. This page lists that number for the common paper sizes, so you can check before exporting rather than discovering the problem on paper.</p>
+
+      <h2>How the numbers are worked out</h2>
+      <p>Two steps, both simple arithmetic:</p>
+      <ul>
+        <li><strong>Convert to inches.</strong> Millimetre sizes divide by 25.4. For example A4 is 210 × 297 mm, so 210 ÷ 25.4 = 8.2677 in and 297 ÷ 25.4 = 11.6929 in.</li>
+        <li><strong>Multiply by the DPI.</strong> <code>width_px = width_in × dpi</code>. At 300 DPI, A4 is 8.2677 × 300 = 2480 px wide and 11.6929 × 300 = 3508 px tall.</li>
+      </ul>
+      <p>Values are rounded to the nearest whole pixel, which is why they are not always exactly divisible.</p>
+
+      <h2>Paper sizes at common print resolutions</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Paper</th>
+              <th scope="col">Physical size</th>
+              <th scope="col">150 DPI</th>
+              <th scope="col">300 DPI</th>
+              <th scope="col">600 DPI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">A3</th><td>297 × 420 mm</td><td>1754 × 2480</td><td><strong>3508 × 4961</strong></td><td>7016 × 9921</td></tr>
+            <tr><th scope="row">A4</th><td>210 × 297 mm</td><td>1240 × 1754</td><td><strong>2480 × 3508</strong></td><td>4961 × 7016</td></tr>
+            <tr><th scope="row">A5</th><td>148 × 210 mm</td><td>874 × 1240</td><td><strong>1748 × 2480</strong></td><td>3496 × 4961</td></tr>
+            <tr><th scope="row">A6</th><td>105 × 148 mm</td><td>620 × 874</td><td><strong>1240 × 1748</strong></td><td>2480 × 3496</td></tr>
+            <tr><th scope="row">US Letter</th><td>8.5 × 11 in</td><td>1275 × 1650</td><td><strong>2550 × 3300</strong></td><td>5100 × 6600</td></tr>
+            <tr><th scope="row">US Legal</th><td>8.5 × 14 in</td><td>1275 × 2100</td><td><strong>2550 × 4200</strong></td><td>5100 × 8400</td></tr>
+            <tr><th scope="row">US Tabloid</th><td>11 × 17 in</td><td>1650 × 2550</td><td><strong>3300 × 5100</strong></td><td>6600 × 10200</td></tr>
+            <tr><th scope="row">US Half Letter</th><td>5.5 × 8.5 in</td><td>825 × 1275</td><td><strong>1650 × 2550</strong></td><td>3300 × 5100</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Which resolution to use</h2>
+      <ul>
+        <li><strong>150 DPI</strong> — acceptable for a poster looked at from a distance. For a coloring page held in your hands, the lines look soft.</li>
+        <li><strong>300 DPI</strong> — the usual target for anything printed and looked at closely, including coloring pages. This is the column to use unless you have a reason not to.</li>
+        <li><strong>600 DPI</strong> — roughly four times the file size for a difference most home printers cannot show. Only worth it for professional output.</li>
+      </ul>
+
+      <h2>Exporting bigger than you need is safe</h2>
+      <p>An image can be printed smaller than its pixel dimensions at no cost in quality. It cannot be printed larger without losing sharpness, because the missing detail is not there to recover. So if you are unsure which size you want, export at the larger one — a 300 DPI A3 file prints fine at A4.</p>
+
+      <h2>Note on sources</h2>
+      <ul>
+        <li>ISO 216 defines the A series: A3 is 297 × 420 mm, A4 is 210 × 297 mm, A5 is 148 × 210 mm, A6 is 105 × 148 mm. Each size is half the area of the one before it.</li>
+        <li>US sizes follow ANSI/ASME Y14.1 and standard office paper practice: Letter 8.5 × 11 in, Legal 8.5 × 14 in, Tabloid 11 × 17 in, Half Letter 5.5 × 8.5 in.</li>
+        <li>The pixel values are computed with the formula above, not measured. The 300 DPI values for A4 and US Letter match what <a href="/">AI Coloring Page Generator</a> exports.</li>
+      </ul>
+
+      <p>Related: <a href="/a4-vs-us-letter/">A4 vs US Letter</a> and <a href="/printable-coloring-page-checklist/">the printing checklist</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <nav class="site-footer__links" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/a4-vs-us-letter/">A4 vs US Letter</a>
+        <a href="/print-sizes/">Print sizes in pixels</a>
+        <a href="/printable-coloring-page-checklist/">Printing checklist</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+      </nav>
+      <p class="site-footer__note">AI Coloring Page Generator · Maintained by an independent developer</p>
+      <p class="site-footer__disclosure">Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you.</p>
+    </div>
+  </footer>
+</body>
+</html>
