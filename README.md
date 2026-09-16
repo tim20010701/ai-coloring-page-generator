@@ -21,6 +21,7 @@ This repository contains two kinds of files. Only the first kind is deployed.
 |---|---|
 | `index.html` | `/` |
 | `a4-vs-us-letter/index.html` | `/a4-vs-us-letter/` |
+| `print-sizes/index.html` | `/print-sizes/` |
 | `printable-coloring-page-checklist/index.html` | `/printable-coloring-page-checklist/` |
 | `about/index.html` | `/about/` |
 | `contact/index.html` | `/contact/` |
@@ -33,7 +34,7 @@ This repository contains two kinds of files. Only the first kind is deployed.
 | `_headers` | not served; adds HTTP response headers |
 | `<indexnow-key>.txt` | not linked; proves domain ownership for IndexNow |
 
-The two guide pages carry the content that also lives as markdown in
+The three guide pages carry the content that also lives as markdown and CSV in
 [printable-coloring-page-toolkit](https://github.com/tim20010701/printable-coloring-page-toolkit),
 so the site has citable material of its own rather than a single tool page.
 
@@ -87,7 +88,7 @@ WRANGLER="node /path/to/wrangler/bin/wrangler.js" bash deploy.sh
 Cloudflare's uploader compares content hashes, so the deploy output tells you directly:
 
 ```
-Uploaded 0 files (13 already uploaded)
+Uploaded 0 files (14 already uploaded)
 ```
 
 Zero new uploads means every file you deployed is byte-identical to what was already live.
@@ -96,7 +97,7 @@ that many files.
 
 ### Verified state
 
-All 13 site files in this repository are byte-identical (SHA-256) to the deployed files and
+All 14 site files in this repository are byte-identical (SHA-256) to the deployed files and
 to the live HTTP responses, with the two documented exceptions below: `contact/index.html`
 and `privacy/index.html` differ from the live response only by Cloudflare's email
 obfuscation, and `_headers` is never served as an asset. Restoring the injected markup on
@@ -172,6 +173,12 @@ script but worth knowing:
 **A plain `*.txt` glob is wrong for the IndexNow key.** `robots.txt` is also a `.txt` file,
 so `for f in *.txt` adds it a second time and the allowlist silently stops being an
 allowlist. The script skips anything already listed.
+
+**Auto-discovery must skip dot-directories.** Both `build_footer.py` and `deploy.sh` find
+pages by walking for `index.html`. `deploy.sh` leaves a `.deploy-stage.<pid>` directory
+behind if it is interrupted, and an auto-discovery that does not skip dot-directories will
+treat those staged copies as real pages — `build_footer.py` did exactly that once. Both
+now exclude any path component starting with a dot.
 
 **Non-browser User-Agents get a 403.** Cloudflare's bot protection in front of this site
 rejects requests that do not look like a browser: `curl -A "Python-urllib/3.13"` returns
