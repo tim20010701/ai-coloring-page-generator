@@ -1,0 +1,4 @@
+# 强制 LF 换行：站点文件在 Windows 上检出时若被转成 CRLF，
+# 本地文件就会和线上部署的那一份不一致。
+# text=auto 让 git 自动识别文本文件，二进制文件不受影响。
+* text=auto eol=lf
