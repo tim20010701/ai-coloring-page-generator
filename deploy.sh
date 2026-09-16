@@ -4,7 +4,7 @@
 #
 # 本仓库里有两类文件，这个脚本只上传第一类：
 #   1. 站点文件  —— 会上传，线上 https://photlin.com/ 能访问到的就是这些
-#   2. 构建工具  —— 不上传（_src/、build_footer.py、deploy.sh、README.md、.gitignore）
+#   2. 构建工具  —— 不上传（_src/、build_footer.py、deploy.sh、README.md、.gitattributes）
 #
 # 站点文件清单写死在下面的 SITE_FILES 里，所以"从仓库部署"的结果永远等于
 # 仓库里的站点文件，不会有构建工具被误发到线上。
@@ -12,10 +12,10 @@
 # 用法：
 #   export CLOUDFLARE_API_TOKEN=...
 #   export CLOUDFLARE_ACCOUNT_ID=...
-#   ./deploy.sh
+#   bash deploy.sh
 #
 # 依赖 wrangler。如果 wrangler 不在 PATH 里，用 WRANGLER 环境变量指定入口，例如：
-#   WRANGLER="node /path/to/wrangler/bin/wrangler.js" ./deploy.sh
+#   WRANGLER="node /path/to/wrangler/bin/wrangler.js" bash deploy.sh
 
 set -euo pipefail
 
