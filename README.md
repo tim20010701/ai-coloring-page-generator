@@ -20,6 +20,8 @@ This repository contains two kinds of files. Only the first kind is deployed.
 | Path | Served at |
 |---|---|
 | `index.html` | `/` |
+| `a4-vs-us-letter/index.html` | `/a4-vs-us-letter/` |
+| `printable-coloring-page-checklist/index.html` | `/printable-coloring-page-checklist/` |
 | `about/index.html` | `/about/` |
 | `contact/index.html` | `/contact/` |
 | `privacy/index.html` | `/privacy/` |
@@ -31,12 +33,16 @@ This repository contains two kinds of files. Only the first kind is deployed.
 | `_headers` | not served; adds HTTP response headers |
 | `<indexnow-key>.txt` | not linked; proves domain ownership for IndexNow |
 
+The two guide pages carry the content that also lives as markdown in
+[printable-coloring-page-toolkit](https://github.com/tim20010701/printable-coloring-page-toolkit),
+so the site has citable material of its own rather than a single tool page.
+
 ### 2. Build tooling (not deployed)
 
 | Path | Purpose |
 |---|---|
-| `_src/footer.html` | Footer partial, kept in sync across the four pages |
-| `build_footer.py` | Injects `_src/footer.html` into every page |
+| `_src/footer.html` | Footer partial, kept in sync across every page |
+| `build_footer.py` | Injects `_src/footer.html` into every page; discovers pages automatically |
 | `deploy.sh` | Deploys the site files (and only those) to Cloudflare Pages |
 | `.gitattributes` | Pins every file to LF so a Windows checkout cannot drift from the live bytes |
 | `.gitignore` | Keeps `deploy.sh`'s staging directory out of the repository |
@@ -60,9 +66,15 @@ bash deploy.sh
 
 (`bash deploy.sh` rather than `./deploy.sh`, so the file does not need the executable bit.)
 
-`deploy.sh` copies only the files listed under *Site files* above into a staging directory,
-normalises line endings to LF, and uploads that. This is what keeps the repository and the
-live site identical.
+`deploy.sh` stages only the site files into a temporary directory, normalises line endings
+to LF, and uploads that. This is what keeps the repository and the live site identical.
+
+The staging list is built in two parts: the non-page assets (`404.html`, `_headers`,
+`app.js`, `robots.txt`, `sitemap.xml`, `styles.css`, and any root `*.txt`) are written out
+explicitly, while pages are discovered automatically by finding every `index.html`. Pages
+are auto-discovered on purpose: a hardcoded list silently drops a new page, so the page
+never goes live and the deploy still reports success. Build tooling is never `index.html`,
+so nothing extra can be swept up.
 
 If `wrangler` is not on your `PATH`, point the script at it:
 
@@ -75,7 +87,7 @@ WRANGLER="node /path/to/wrangler/bin/wrangler.js" bash deploy.sh
 Cloudflare's uploader compares content hashes, so the deploy output tells you directly:
 
 ```
-Uploaded 0 files (11 already uploaded)
+Uploaded 0 files (13 already uploaded)
 ```
 
 Zero new uploads means every file you deployed is byte-identical to what was already live.
@@ -84,7 +96,7 @@ that many files.
 
 ### Verified state
 
-All 11 site files in this repository are byte-identical (SHA-256) to the deployed files and
+All 13 site files in this repository are byte-identical (SHA-256) to the deployed files and
 to the live HTTP responses, with the two documented exceptions below: `contact/index.html`
 and `privacy/index.html` differ from the live response only by Cloudflare's email
 obfuscation, and `_headers` is never served as an asset. Restoring the injected markup on
@@ -160,6 +172,13 @@ script but worth knowing:
 **A plain `*.txt` glob is wrong for the IndexNow key.** `robots.txt` is also a `.txt` file,
 so `for f in *.txt` adds it a second time and the allowlist silently stops being an
 allowlist. The script skips anything already listed.
+
+**Non-browser User-Agents get a 403.** Cloudflare's bot protection in front of this site
+rejects requests that do not look like a browser: `curl -A "Python-urllib/3.13"` returns
+403 on every URL, including the IndexNow key file and the home page, while a browser UA
+returns 200. Verified that search-engine crawler UAs are allowed through. If you script a
+check against this site and see 403, set a browser User-Agent before concluding anything
+is broken.
 
 ---
 
