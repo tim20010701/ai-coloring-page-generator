@@ -21,8 +21,12 @@ EXCLUDE_DIRS = {"_src", ".git", "node_modules"}
 def discover_pages():
     pages = set()
     for p in BASE.rglob("index.html"):
-        if EXCLUDE_DIRS.isdisjoint(p.relative_to(BASE).parts):
-            pages.add(p)
+        parts = p.relative_to(BASE).parts
+        # 跳过 _src/ 之类的构建目录，以及任何点开头的目录
+        # （deploy.sh 的暂存目录 .deploy-stage.* 就藏在这里面，不能当页面处理）
+        if EXCLUDE_DIRS.intersection(parts) or any(x.startswith(".") for x in parts):
+            continue
+        pages.add(p)
     top_404 = BASE / "404.html"
     if top_404.exists():
         pages.add(top_404)
