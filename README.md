@@ -39,6 +39,7 @@ This repository contains two kinds of files. Only the first kind is deployed.
 | `build_footer.py` | Injects `_src/footer.html` into every page |
 | `deploy.sh` | Deploys the site files (and only those) to Cloudflare Pages |
 | `.gitattributes` | Pins every file to LF so a Windows checkout cannot drift from the live bytes |
+| `.gitignore` | Keeps `deploy.sh`'s staging directory out of the repository |
 | `README.md` | This file |
 
 These are deliberately excluded from deployment. Requesting them on the live site returns
@@ -89,6 +90,16 @@ and `privacy/index.html` differ from the live response only by Cloudflare's emai
 obfuscation, and `_headers` is never served as an asset. Restoring the injected markup on
 those two pages reproduces the repository bytes exactly.
 
+Independently confirmed end-to-end: staging the site files and running `deploy.sh` against
+the production project reported
+
+```
+Success! Uploaded 0 files (10 already uploaded)
+```
+
+Zero uploads means Cloudflare's own content hashes agreed that every staged file already
+matched the live site.
+
 ### Rolling back
 
 ```sh
@@ -134,6 +145,21 @@ byte-identical to this repository.
 
 **`_headers` is not a static asset.** Cloudflare Pages parses it and applies the headers,
 and returns 404 for `/_headers` itself.
+
+**Running `deploy.sh` from Git Bash on Windows.** Two path traps, both handled by the
+script but worth knowing:
+
+- `mktemp -d` can return `C:\tmp\tmp.XXXX` even when `C:\tmp` does not exist, and wrangler
+  then fails with `ENOENT ... scandir`. The script stages into a relative
+  `.deploy-stage.<pid>` directory in the current folder instead.
+- wrangler resolves its target directory against `process.env.PWD`, **not**
+  `process.cwd()`. Git Bash sets `PWD=/c/Users/...`, which Node reads as `C:\c\Users\...`
+  and fails with `ENOENT ... scandir`. The script converts the path with `cygpath -m` and
+  also unsets `PWD` for the wrangler call. Passing a plain relative path is *not* enough.
+
+**A plain `*.txt` glob is wrong for the IndexNow key.** `robots.txt` is also a `.txt` file,
+so `for f in *.txt` adds it a second time and the allowlist silently stops being an
+allowlist. The script skips anything already listed.
 
 ---
 
