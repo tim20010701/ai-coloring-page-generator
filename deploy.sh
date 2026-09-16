@@ -34,18 +34,25 @@ if [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
 fi
 
 # --- 站点文件：必须与线上逐字节一致 ---
+# 分两类收集：
+#   1. 非页面文件 —— 写死清单，改动了要显式确认
+#   2. 页面       —— 自动发现所有 index.html
+# 页面用自动发现的原因：加新页面时最容易忘了往写死的清单里补一行，
+# 而这种漏掉是静默的 —— 新页面根本不会上线，你还以为部署成功了。
+# 构建工具（_src/、*.py、*.md）都不是 index.html，所以不会被误带上线。
 SITE_FILES=(
   404.html
   _headers
-  about/index.html
   app.js
-  contact/index.html
-  index.html
-  privacy/index.html
   robots.txt
   sitemap.xml
   styles.css
 )
+
+while IFS= read -r f; do
+  SITE_FILES+=("$f")
+done < <(find . -name index.html -not -path "./_src/*" -not -path "./.*" \
+           | sed 's|^\./||' | LC_ALL=C sort)
 
 # IndexNow 的密钥文件：仓库根目录下的 *.txt，文件名就是密钥本身。
 # 注意不能简单地用 *.txt 全收 —— robots.txt 也是 .txt，会被重复收进来。
